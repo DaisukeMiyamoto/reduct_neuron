@@ -77,9 +77,10 @@ reduct1(branch_list)
 make_hist_from_branch_list(branch_list)
 
 swc = Swc(argvs[1])
-swc.printfile()
+#swc.printfile()
 
 
 #get_hist(data)
+
 
 
