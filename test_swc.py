@@ -13,9 +13,7 @@ if(argc != 3):
 
 swc = Swc(argvs[1])
 swc.show_hist()
-swc.show_branch_list()
-#swc.show_data()
 swc.reduct1()
-#swc.show_hist()
+swc.show_hist()
 swc.write(argvs[2])
 

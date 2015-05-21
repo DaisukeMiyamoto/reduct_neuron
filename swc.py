@@ -33,6 +33,7 @@ class Swc:
         self.make_branch_list()
 
     def make_branch_list(self):
+        branch_list = []
         self.branch_list.append([0,0])
 
         for record in self.data :
@@ -80,8 +81,6 @@ class Swc:
         data = copy.deepcopy(self.data)
         reduce_map = []
         i = 1
-        self.show_data()
-        self.show_branch_list()
 
         for record in self.branch_list :
             if record[0] == 0 :
@@ -89,31 +88,22 @@ class Swc:
             else:
                 reduce_map.append(i)
                 i+=1
-        print reduce_map
         
-        print "-----------------------------------------"
-        self.show_branch_list()
-        print "-----------------------------------------"
-
         for i in range(len(self.data)):
             data[i][0] = reduce_map[data[i][0]]
             if data[i][6] > 0:
                 data[i][6] = reduce_map[self.branch_list[i+1][1]]
 
-        self.show_data()
 
         self.data = []
         for record in data:
             if(record[0]!=0):
                 self.data.append(record)
 
-        self.show_data()
 
 
 
     def reduct1(self):
-        self.show_branch_list()
-
         for record in self.branch_list :
             #self.show_branch_list()
             #print "-----------------------------------------"
@@ -128,3 +118,6 @@ class Swc:
         
         self.branch_list_to_data()
 
+    def reduct2(self):
+
+        
