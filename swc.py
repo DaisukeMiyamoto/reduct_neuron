@@ -57,6 +57,8 @@ class Swc:
             if len(record) != 0 :
                 print record
 
+    def show_filename(self):
+        print self.filename
 
     def show_data(self):
         for record in self.data :
@@ -118,6 +120,4 @@ class Swc:
         
         self.branch_list_to_data()
 
-    def reduct2(self):
-
-        
+#    def reduct2(self):
