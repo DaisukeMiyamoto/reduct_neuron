@@ -120,4 +120,16 @@ class Swc:
         
         self.branch_list_to_data()
 
-#    def reduct2(self):
+    def reduct2(self):
+        vollist = []
+        for i in range(len(self.data)) :
+            vollist.append([i, self.data[i][5]])
+        
+        vollist.sort(key=lambda x:x[1])
+        #print vollist
+#        print self.branch_list
+        for i in range(len(vollist)) :
+            if len(self.branch_list[vollist[i][0]]) == 2 :
+                self.branch_list[vollist[i][0]][0] = 0
+
+        self.branch_list_to_data()
