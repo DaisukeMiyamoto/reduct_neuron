@@ -33,7 +33,7 @@ class Swc:
         self.make_branch_list()
 
     def make_branch_list(self):
-        branch_list = []
+        self.branch_list = []
         self.branch_list.append([0,0])
 
         for record in self.data :
@@ -104,7 +104,7 @@ class Swc:
             if(record[0]!=0):
                 self.data.append(record)
 
-
+        self.make_branch_list()
 
 
     def reduct1(self):
