@@ -90,6 +90,8 @@ class Swc:
             else:
                 reduce_map.append(i)
                 i+=1
+        print "reduce_map"
+        print reduce_map
         
         for i in range(len(self.data)):
             data[i][0] = reduce_map[data[i][0]]
@@ -121,15 +123,21 @@ class Swc:
         self.branch_list_to_data()
 
     def reduct2(self):
+        print "branch_list :"
+        print self.branch_list
+
         vollist = []
-        for i in range(len(self.data)) :
-            vollist.append([i, self.data[i][5]])
+        for i in range(len(self.branch_list)) :
+            vollist.append([i, self.data[i-1][5]])
         
         vollist.sort(key=lambda x:x[1])
-        #print vollist
+        print "vollist :"
+        print vollist
 #        print self.branch_list
         for i in range(len(vollist)) :
             if len(self.branch_list[vollist[i][0]]) == 2 :
                 self.branch_list[vollist[i][0]][0] = 0
 
+        print "branch_list :"
+        print self.branch_list
         self.branch_list_to_data()
