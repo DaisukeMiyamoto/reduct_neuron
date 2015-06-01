@@ -12,14 +12,14 @@ if(argc != 3):
     quit()
 
 swc = Swc(argvs[1])
-print "original histgram:"
-swc.show_hist()
-print "after reduct2 histgram:"
+#swc.show_hist()
+org = swc.size_of_data()
 swc.reduct2()
-swc.show_hist()
-print "after reduct1 histgram:"
+#swc.show_hist()
 swc.reduct1()
-swc.show_hist()
+final = swc.size_of_data()
+#swc.show_hist()
 
 swc.write(argvs[2])
 
+print "%d -> %d" % (org, final)
