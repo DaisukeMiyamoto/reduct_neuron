@@ -1,17 +1,63 @@
 import copy
 
+'''
+from neuromorpho.org
+
+The three dimensional structure of a neuron can be represented in a SWC format (Cannon et al., 1998). SWC is a simple Standardized format. Each line has 7 fields encoding data for a single neuronal compartment:
+an integer number as compartment identifier
+type of neuronal compartment 
+   0 - undefined
+   1 - soma
+   2 - axon
+   3 - basal dendrite
+   4 - apical dendrite
+x coordinate of the compartment
+y coordinate of the compartment
+z coordinate of the compartment
+radius of the compartment
+parent compartment
+'''
+
+
 class Swc:
     filename = ""
     data = []
-    header = ""
     branch_list = []
+    header = ""
+    base_header = \
+'''\
+#ORIGINAL_SOURCE neb_SWC_Tools
+#SOMA_AREA 
+#SHINKAGE_CORRECTION 1.000000 1.000000 1.000000
+#VERSION_NUMBER 0.1
+#VERSION_DATE 2015-06-20
+#SCALE 1.0 1.0 1.0
+'''    
+    def __init__(self, **kwds):
+        if("filename" in kwds):
+            self.filename = filename
+            self.data = []
+            self.header = ""
+            self.branch_list = []
+            self.loadswc()
+        else:
+            self.filename = ""
+            self.data = []
+            self.header = ""
+            self.branch_list = []        
+    
 
-    def __init__(self, filename):
-        self.filename = filename
+    def genswc(self, ncmp):
+
         self.data = []
-        self.header = ""
-        self.branch_list = []
-        self.loadswc()
+        self.header = self.base_header
+        self.data.append([1, 0, 10.0, 10.0, 10.0, 1.0, -1])
+        i=1
+        while(i<ncmp):
+            i += 1
+            self.data.append([i, 0, 10.0, 9.9+i*0.1, 10.0, 1.0, i-1])
+
+        self.data_to_branch_list()
 
     def loadswc(self, filename):
         self.filename = filename
@@ -30,9 +76,9 @@ class Swc:
                                       float(record[5]), int(record[6])])
                     i+=1                
         f.close()
-        self.make_branch_list()
+        self.data_to_branch_list()
 
-    def make_branch_list(self):
+    def data_to_branch_list(self):
         self.branch_list = []
         self.branch_list.append([0,0])
 
@@ -106,10 +152,26 @@ class Swc:
             if(record[0]!=0):
                 self.data.append(record)
 
-        self.make_branch_list()
+        self.data_to_branch_list()
 
 
     def reduct1(self):
+        # remove 
+
+        vollist = []
+        for i in range(len(self.branch_list)) :
+            vollist.append([i, self.data[i-1][5]])
+        
+        vollist.sort(key=lambda x:x[1])
+        for i in range(len(vollist)) :
+            if len(self.branch_list[vollist[i][0]]) == 2 :
+                self.branch_list[vollist[i][0]][0] = 0
+
+        self.branch_list_to_data()
+
+
+    def reduct2(self):
+        # remove non branching 
         for record in self.branch_list :
             #self.show_branch_list()
             #print "-----------------------------------------"
@@ -124,22 +186,3 @@ class Swc:
         
         self.branch_list_to_data()
 
-    def reduct2(self):
-        #print "branch_list :"
-        #print self.branch_list
-
-        vollist = []
-        for i in range(len(self.branch_list)) :
-            vollist.append([i, self.data[i-1][5]])
-        
-        vollist.sort(key=lambda x:x[1])
-        #print "vollist :"
-        #print vollist
-        #print self.branch_list
-        for i in range(len(vollist)) :
-            if len(self.branch_list[vollist[i][0]]) == 2 :
-                self.branch_list[vollist[i][0]][0] = 0
-
-        #print "branch_list :"
-        #print self.branch_list
-        self.branch_list_to_data()
