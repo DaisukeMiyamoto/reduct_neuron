@@ -1,0 +1,5 @@
+base_swc/0965orig.swc : cmp=26220 length=10709.9 [um] vol=6684.9 [um^3]
+base_swc/0965orig-1.swc : cmp=25592 length=10564.2 [um] vol=6619.8 [um^3]
+base_swc/0965orig-1-2.swc : cmp=1175 length=9188.9 [um] vol=7335.4 [um^3]
+base_swc/0965orig-1-2-1.swc : cmp=568 length=4988.9 [um] vol=4950.7 [um^3]
+base_swc/0965orig-1-2-1-2.swc : cmp=286 length=4620.0 [um] vol=5783.2 [um^3]

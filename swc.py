@@ -1,4 +1,5 @@
 import copy
+from math import sqrt
 
 '''
 from neuromorpho.org
@@ -20,6 +21,7 @@ parent compartment
 
 
 class Swc:
+    pi = 3.1415926535
     filename = ""
     data = []
     branch_list = []
@@ -34,7 +36,7 @@ class Swc:
 #SCALE 1.0 1.0 1.0
 '''    
     def __init__(self, **kwds):
-        if("filename" in kwds):
+        if('filename' in kwds):
             self.filename = kwds['filename']
             self.data = []
             self.header = ""
@@ -96,7 +98,7 @@ class Swc:
         for record in self.data :
             line = str(record[0]) +" "+ str(record[1]) +" "+ str(record[2]) +" "+ str(record[3]) +" "+ str(record[4]) +" "+ str(record[5]) +" "+ str(record[6]) +"\n"
             f.write(line)
-            
+        self.filename = filename
 
     def show_branch_list(self):
         for record in self.branch_list :
@@ -132,7 +134,7 @@ class Swc:
         reduce_map = []
         i = 1
 
-        for record in self.branch_list :
+        for record in self.branch_list:
             if record[0] == 0 :
                 reduce_map.append(0)
             else:
@@ -154,6 +156,34 @@ class Swc:
 
         self.data_to_branch_list()
 
+    def get_filename(self):
+        return self.filename
+
+    def get_total_length(self):
+        length = 0
+        for record in self.data:
+            if(record[6]!=-1):
+                #print "sqrt( (%f-%f)**2 + (%f-%f)**2 + (%f-%f**2) )" % (record[2], self.data[record[6]-1][2], record[3], self.data[record[6]-1][3], record[4], self.data[record[6]-1][4])
+                length += sqrt( \
+                                (record[2] - self.data[record[6]-1][2])**2 \
+                                + (record[3] - self.data[record[6]-1][3])**2 \
+                                + (record[4] - self.data[record[6]-1][4])**2 \
+                        )
+        return length
+
+    def get_total_volume(self):
+        vol = 0
+        for record in self.data:
+            if(record[6]!=-1):
+                vol += sqrt( \
+                                (record[2] - self.data[record[6]-1][2])**2 \
+                                + (record[3] - self.data[record[6]-1][3])**2 \
+                                + (record[4] - self.data[record[6]-1][4])**2 \
+                        ) * ((record[5] + self.data[record[6]-1][5])/2)**2 * self.pi
+        return vol
+
+    def get_n_cmp(self):
+        return(self.size_of_data())
 
     def reduct1(self):
         # remove terminal node

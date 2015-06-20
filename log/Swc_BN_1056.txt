@@ -1,0 +1,5 @@
+base_swc/Swc_BN_1056.swc : cmp=3889 length=9407.4 [um] vol=27723.4 [um^3]
+base_swc/Swc_BN_1056-1.swc : cmp=2856 length=6695.3 [um] vol=21403.5 [um^3]
+base_swc/Swc_BN_1056-1-2.swc : cmp=859 length=5826.3 [um] vol=19456.8 [um^3]
+base_swc/Swc_BN_1056-1-2-1.swc : cmp=369 length=3041.8 [um] vol=12839.2 [um^3]
+base_swc/Swc_BN_1056-1-2-1-2.swc : cmp=186 length=2819.6 [um] vol=12310.7 [um^3]
