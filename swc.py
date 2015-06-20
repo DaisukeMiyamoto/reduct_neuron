@@ -35,7 +35,7 @@ class Swc:
 '''    
     def __init__(self, **kwds):
         if("filename" in kwds):
-            self.filename = filename
+            self.filename = kwds['filename']
             self.data = []
             self.header = ""
             self.branch_list = []
@@ -156,7 +156,7 @@ class Swc:
 
 
     def reduct1(self):
-        # remove 
+        # remove terminal node
 
         vollist = []
         for i in range(len(self.branch_list)) :
@@ -171,7 +171,8 @@ class Swc:
 
 
     def reduct2(self):
-        # remove non branching 
+        # remove non branching node
+
         for record in self.branch_list :
             #self.show_branch_list()
             #print "-----------------------------------------"
