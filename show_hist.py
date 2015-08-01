@@ -10,7 +10,7 @@ if(argc != 2):
     print 'Usage : ./%s (input_swc)' % (argvs[0])
     quit()
 
-swc = Swc(argvs[1])
+swc = Swc(filename=argvs[1])
 swc.show_filename()
 swc.show_hist()
 

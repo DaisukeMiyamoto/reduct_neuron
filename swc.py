@@ -22,6 +22,7 @@ parent compartment
 
 class Swc:
     pi = 3.1415926535
+    show_debufinfo=0
     filename = ""
     data = []
     branch_list = []
@@ -47,6 +48,15 @@ class Swc:
             self.data = []
             self.header = ""
             self.branch_list = []        
+        if('set_fingerprint' in kwds):
+            if(kwds['set_fingerprint']==1):
+                self.set_fingerprint()
+        if('show_debuginfo' in kwds):
+            if(kwds['show_debuginfo']==1):
+                self.show_debuginfo=1
+        else:
+            self.show_debuginfo=0
+
     
 
     def genswc(self, ncmp):
@@ -140,8 +150,13 @@ class Swc:
             else:
                 reduce_map.append(i)
                 i+=1
-        #print "reduce_map"
-        #print reduce_map
+
+        if self.show_debuginfo==1:
+            print "branch_list"
+            print self.branch_list
+            
+            print "reduce_map"
+            print reduce_map
         
         for i in range(len(self.data)):
             data[i][0] = reduce_map[data[i][0]]
@@ -187,6 +202,9 @@ class Swc:
 
     def reduct1(self):
         # remove terminal node
+        if self.show_debuginfo==1:
+            print "branch_list"
+            print self.branch_list
 
         vollist = []
         for i in range(len(self.branch_list)) :
@@ -216,4 +234,9 @@ class Swc:
                             record2[1] = self.branch_list[record2[1]][1]
         
         self.branch_list_to_data()
+
+
+    def set_fingerprint(self):
+        for record in self.data:
+            record[1] = record[0]
 

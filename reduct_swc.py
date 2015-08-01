@@ -11,7 +11,7 @@ if(argc != 2):
 
 
 filename = argvs[1]
-swc = Swc(filename=argvs[1])
+swc = Swc(filename=argvs[1], set_fingerprint=1)
 print "%s : cmp=%d length=%.1f [um] vol=%.1f [um^3]" % (swc.get_filename(), swc.get_n_cmp(), swc.get_total_length(), swc.get_total_volume())
 
 
@@ -34,4 +34,3 @@ filename4 = filename3.replace('.', '-2.', 1)
 swc.reduct2()
 swc.write(filename4)
 print "%s : cmp=%d length=%.1f [um] vol=%.1f [um^3]" % (swc.get_filename(), swc.get_n_cmp(), swc.get_total_length(), swc.get_total_volume())
-
