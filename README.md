@@ -10,6 +10,6 @@ reduce branch of neuron (swc file)
 
 ### options
 * add compartment fingerprint to second field of SWC  
-`swc = Swc(filename='hogehoge.swc', set_fingerprint)`
+`swc = Swc(filename='hogehoge.swc', set_fingerprint=1)`
 
 ## reduct compartment
