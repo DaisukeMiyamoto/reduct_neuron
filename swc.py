@@ -35,7 +35,7 @@ class Swc:
 #VERSION_NUMBER 0.1
 #VERSION_DATE 2015-06-20
 #SCALE 1.0 1.0 1.0
-'''    
+'''
     def __init__(self, **kwds):
         if('filename' in kwds):
             self.filename = kwds['filename']
@@ -47,7 +47,7 @@ class Swc:
             self.filename = ""
             self.data = []
             self.header = ""
-            self.branch_list = []        
+            self.branch_list = []
         if('set_fingerprint' in kwds):
             if(kwds['set_fingerprint']==1):
                 self.set_fingerprint()
@@ -57,7 +57,7 @@ class Swc:
         else:
             self.show_debuginfo=0
 
-    
+
 
     def genswc(self, ncmp):
 
@@ -84,9 +84,9 @@ class Swc:
             else :
                 record = line.split(" ")
                 if len(record)==7:
-                    self.data.append([int(record[0]), int(record[1]), float(record[2]), float(record[3]), float(record[4]), 
+                    self.data.append([int(record[0]), int(record[1]), float(record[2]), float(record[3]), float(record[4]),
                                       float(record[5]), int(record[6])])
-                    i+=1                
+                    i+=1
         f.close()
         self.data_to_branch_list()
 
@@ -113,18 +113,17 @@ class Swc:
     def show_branch_list(self):
         for record in self.branch_list :
             if len(record) != 0 :
-                print record
+                print(record)
 
     def show_filename(self):
-        print self.filename
+        print(self.filename)
 
     def show_data(self):
         for record in self.data :
-            print record
+            print(record)
 
     def show_header(self):
-        print self.header
-
+        print(self.header)
 
     def show_hist(self):
         hist = [0] * 20
@@ -134,7 +133,7 @@ class Swc:
                 hist[len(record)-2]+=1
 
         for i in range(len(hist)) :
-            print "%d : %d" % (i,  hist[i])
+            print("%d : %d" % (i, hist[i]))
 
     def size_of_data(self):
         return len(self.data)
@@ -152,12 +151,12 @@ class Swc:
                 i+=1
 
         if self.show_debuginfo==1:
-            print "branch_list"
-            print self.branch_list
-            
-            print "reduce_map"
-            print reduce_map
-        
+            print("branch_list")
+            print(self.branch_list)
+
+            print("reduce_map")
+            print(reduce_map)
+
         for i in range(len(self.data)):
             data[i][0] = reduce_map[data[i][0]]
             if data[i][6] > 0:
@@ -203,13 +202,13 @@ class Swc:
     def reduct1(self):
         # remove terminal node
         if self.show_debuginfo==1:
-            print "branch_list"
-            print self.branch_list
+            print("branch_list")
+            print(self.branch_list)
 
         vollist = []
         for i in range(len(self.branch_list)) :
             vollist.append([i, self.data[i-1][5]])
-        
+
         vollist.sort(key=lambda x:x[1])
         for i in range(len(vollist)) :
             if len(self.branch_list[vollist[i][0]]) == 2 :
@@ -232,7 +231,7 @@ class Swc:
                         record2[1] = record[1]
                         while self.branch_list[record2[1]][0] == 0 :
                             record2[1] = self.branch_list[record2[1]][1]
-        
+
         self.branch_list_to_data()
 
 
