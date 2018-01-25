@@ -34,13 +34,17 @@ def reduct_swc(filename):
     swc.get_filename(), swc.get_n_cmp(), swc.get_total_length(), swc.get_total_volume()))
 
 
-if __name__ == '__main__':
-
-    filelist_name = 'sample_list.txt'
-
+def process_list(filelist_name):
     with open(filelist_name, 'r') as f:
         filelist = [line.strip() for line in f.readlines()]
 
     for file in filelist:
         print('Processing %s', file)
         reduct_swc(file)
+
+
+if __name__ == '__main__':
+    # process_list('sample_list.txt')
+    # process_list('flycircuit_M_list.txt')
+    process_list('flycircuit_F_list_again.txt')
+
