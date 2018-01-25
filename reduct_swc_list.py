@@ -46,5 +46,5 @@ def process_list(filelist_name):
 if __name__ == '__main__':
     # process_list('sample_list.txt')
     # process_list('flycircuit_M_list.txt')
-    process_list('flycircuit_F_list_again.txt')
-
+    # process_list('flycircuit_F_list_again.txt')
+    process_list('silkmoth_list.txt')

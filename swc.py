@@ -220,7 +220,7 @@ class Swc:
     def reduct2(self):
         # remove non branching node
 
-        for record in self.branch_list :
+        for record in self.branch_list:
             #self.show_branch_list()
             #print "-----------------------------------------"
             if len(record) == 3 and record[1]>0:
@@ -229,7 +229,7 @@ class Swc:
                 for record2 in self.branch_list :
                     if target == record2[1] :
                         record2[1] = record[1]
-                        while self.branch_list[record2[1]][0] == 0 :
+                        while self.branch_list[record2[1]][0] == 0:
                             record2[1] = self.branch_list[record2[1]][1]
 
         self.branch_list_to_data()
